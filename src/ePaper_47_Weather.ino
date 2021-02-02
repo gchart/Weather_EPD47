@@ -23,6 +23,7 @@
 #include "epd_driver.h"
 #include "WeatherIcons150.h"
 #include "WeatherIcons72.h"
+#include "MoonPhases24.h" // by Curtis Clark
 #include "Roboto16.h"
 #include "Roboto20.h"
 #include "Roboto24.h"
@@ -79,6 +80,7 @@ void DisplayGrid();
 void DisplayCurrentWeather();
 void DisplayForecast(int f);
 void DisplayBattery();
+void DisplayMoonPhase();
 void drawString(int x, int y, String text, alignment align);
 void setFont(GFXfont const&font);
 
@@ -339,6 +341,7 @@ void DisplayWeather() {
   DisplayCurrentWeather();
   for(int f = 0; f < fcst_readings; f++) { DisplayForecast(f); }
   DisplayBattery();
+  DisplayMoonPhase();
 }
 
 void DisplayGrid() {
@@ -410,4 +413,20 @@ void DisplayBattery() {
     epd_write_line(batt_x+45, batt_y-3, batt_x+25, batt_y+29, color, framebuffer);
     epd_write_line(batt_x+46, batt_y-3, batt_x+26, batt_y+29, color, framebuffer);
   }
+}
+
+void DisplayMoonPhase() {
+  // https://www.subsystems.us/uploads/9/8/9/4/98948044/moonphase.pdf
+  int yy   = ConvertUnixTime(WxConditions[0].Dt, "%C").toInt();
+  int yyyy = ConvertUnixTime(WxConditions[0].Dt, "%Y").toInt();
+  int mm   = ConvertUnixTime(WxConditions[0].Dt, "%m").toInt();
+  int dd   = ConvertUnixTime(WxConditions[0].Dt, "%d").toInt();
+  double julian = (2 - yy + (int)(yy/4)) + dd + (365.25 * (yyyy + 4716)) + (30.6001 * (mm + 1)) - 1524.5;
+  // get day diff from a known date of a full moon, then modulo the lunar cycle time
+  double phase = fmod((julian - 2459225.9502), 29.530588853);
+  int moon = round(28*(phase/29.530588853));
+  // The new moon is mapped to 0 and the full moon is mapped to @.  Other phases range from A-Z.
+  char moon_icons[] = "0ABCDEFGHIJKLM@NOPQRSTUVWXYZ";
+  setFont(MoonPhases24);
+  drawString(280, 470, String(moon_icons[moon]), CCENTER);
 }
