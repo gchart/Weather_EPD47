@@ -6,7 +6,7 @@ Make sure to update the config.h file with your wifi credentials, OpenWeatherMap
 
 *Update 2021-02-02:* Added lunar phase icons
 
-![Weather EPD47](weather_epd47.jpg)
+![Weather EPD47](weather_epd47_2.jpg)
 
 *Update 2021-02-01:* I've added a simple, [one-piece case design for 3D printing](EPD47-Case.stl).  Print face down, and for best results, print using tree supports touching the build plate only.  For mounting on metallic surfaces such as a refrigerator, this uses 2 neodymium magnets of size 10x2 mm (10mm diameter, 2mm thick... mine actually measured 9.5mm x 1.8mm).  This case is thin enough to support lipo cells, but not the 18650s.
 
