@@ -4,7 +4,7 @@ Weather display for the [LilyGo 4.7" ePaper display with ESP32](https://github.c
 
 Make sure to update the config.h file with your wifi credentials, OpenWeatherMap API key, and regional settings (timezone, imperial/metric, and string translations).
 
-*Update 2021-02-02:* Added lunar phases icons
+*Update 2021-02-02:* Added lunar phase icons
 
 ![Weather EPD47](weather_epd47.jpg)
 
