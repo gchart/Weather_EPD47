@@ -23,6 +23,11 @@ const String TXT_HUMIDITY          = "RH";            // abbreviation for relati
 const String TXT_UPDATED           = "Updated";       // "Updated" part of "Updated at" time
 const String TXT_AT                = "at";            // "at" part of "Updated at" time
 
+// UTC Unix timestamp of the date of a previous New Moon
+// Get a date/time here: https://www.timeanddate.com/moon/phases/
+// And convert it to UTC Unix timestamp here: https://www.epochconverter.com/
+int new_moon = 1610514000;
+
 
 // no need to touch this, the pre-processor will switch these automatically if you un-commented "USE_METRIC" at the top
 #ifdef USE_METRIC
